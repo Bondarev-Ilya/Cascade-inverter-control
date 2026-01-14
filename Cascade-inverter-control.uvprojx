@@ -429,7 +429,7 @@
                   <MiscControls></MiscControls>
                   <Define></Define>
                   <Undefine></Undefine>
-                  <IncludePath>.\Function\Measure;.\Function\Freq_up</IncludePath>
+                  <IncludePath>.\Function\Measure;.\Function\Freq_up;.\Function\Power_control</IncludePath>
                 </VariousControls>
               </Cads>
               <Aads>
@@ -467,6 +467,11 @@
               <FileName>freq_up.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Function\Freq_up\freq_up.c</FilePath>
+            </File>
+            <File>
+              <FileName>power_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Function\Power_control\power_control.c</FilePath>
             </File>
           </Files>
         </Group>

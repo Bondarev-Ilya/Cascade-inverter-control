@@ -10,8 +10,6 @@ static uint32_t Result_Measure[2] = {0};
 
 float Voltage_measure = 0.0f;
 float Current_measure = 0.0f;
-float filtred_1 = 0.0f;
-
 
 void measure_init(void){
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
@@ -56,9 +54,9 @@ void DMA2_Stream0_IRQHandler(void){
 	// Normalization of measured signals
 	Voltage_measure = 3.3f*Result_Measure[0]/4095.0f;
 	Current_measure = 3.3f*Result_Measure[1]/4095.0f;
-	
-	
+		
 	TOGI();
+	Power_Control();
 	
 	GPIOC->BSRR |= GPIO_BSRR_BR14; // Stop check calculation time
 }
