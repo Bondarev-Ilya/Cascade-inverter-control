@@ -10,7 +10,7 @@
 #define TIM_CCMR1_CC1S_OUTPUT 0
 
 #include <stm32f411xe.h>
-#include "math.h"
+#include "power_control.h"
 
 void measure_init(void);
 void TOGI(void);
@@ -18,7 +18,6 @@ void DMA2_Stream0_IRQHandler(void);
 
 extern float Voltage_measure;
 extern float Current_measure;
-extern float filtred_1;
 
 typedef struct{
 	float offset;
@@ -27,5 +26,8 @@ typedef struct{
 	float beta;
 	float omega;
 }togi_t;
+
+extern togi_t Voltage;
+extern togi_t Current;
 
 #endif
