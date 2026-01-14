@@ -5,5 +5,6 @@
 #include "measure.h"
 #include "power_control.h"
 #include "freq_up.h"
+#include "pwm.h"
 
 #endif

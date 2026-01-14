@@ -3,7 +3,7 @@
 int main(void){
 	Freq_up_to_100_MHz();
 	measure_init();
-	GPIOC->ODR &= ~GPIO_ODR_OD13;
+	GPIOC->BSRR = GPIO_BRR_BR13;
 	while(1==1){
 		
 	}
