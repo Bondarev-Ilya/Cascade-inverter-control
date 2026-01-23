@@ -7,6 +7,12 @@ togi_t Current = {
 };
 
 static uint32_t Result_Measure[2] = {0};
+static uint8_t freq;
+static float time;
+static float ans_sin1 = 0.0f;
+static float ans_sin2 = 0.0f;
+static float pi = 3.13159f;
+static float wt = 0.0f;
 
 float Voltage_measure = 0.0f;
 float Current_measure = 0.0f;
@@ -51,12 +57,22 @@ void DMA2_Stream0_IRQHandler(void){
 	DMA2->LIFCR |= DMA_LIFCR_CTCIF0;
 	GPIOC->BSRR |= GPIO_BSRR_BS14; // Start check calculation time
 	
+	/*
 	// Normalization of measured signals
 	Voltage_measure = 3.3f*Result_Measure[0]/4095.0f;
 	Current_measure = 3.3f*Result_Measure[1]/4095.0f;
 		
 	TOGI();
 	Power_Control();
+	*/
+	
+	wt = freq*2.0f*pi*time;
+	ans_sin1 = sin(wt + 0.0f);
+	ans_sin2 = sin(wt + pi/2.0f);
+	time += SAMPLING_STEP;
+	if(time>0.02f){
+		time = 0.0f;		
+	}
 	
 	GPIOC->BSRR |= GPIO_BSRR_BR14; // Stop check calculation time
 }

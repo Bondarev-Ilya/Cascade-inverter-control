@@ -12,6 +12,7 @@
 
 #include <stm32f411xe.h>
 #include "power_control.h"
+#include "math.h"
 
 void measure_init(void);
 void TOGI(void);
