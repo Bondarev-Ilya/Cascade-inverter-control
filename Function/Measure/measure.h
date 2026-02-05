@@ -1,14 +1,9 @@
-
 #ifndef MEASURE_H_
 #define	MEASURE_H_
 
+#define MEASURE_GAIN 0.0054f
 #define SOGI_GAIN 100
-#define FILTER_ALFA 0.1f
 #define SAMPLING_STEP 1.0f/10000.0f
-#define GPIO_MODER_OUTPUT 1
-#define GPIO_MODER_ANALOG 3
-#define TIM_CCMR1_PWM_MODE_1 6
-#define TIM_CCMR1_CC1S_OUTPUT 0
 
 #include <stm32f411xe.h>
 #include "power_control.h"

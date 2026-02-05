@@ -7,6 +7,8 @@
 
 void Power_Control(void);
 
+extern float Voltage_Amp;
+extern float Voltage_Set;
 extern float P_ref;
 extern float Q_ref;
 extern float Kp;

@@ -1,5 +1,10 @@
 #include "measure.h"
 
+#define GPIO_MODER_OUTPUT 1
+#define GPIO_MODER_ANALOG 3
+#define TIM_CCMR1_PWM_MODE_1 6
+#define TIM_CCMR1_CC1S_OUTPUT 0
+
 togi_t Voltage = {
 	.omega = 50.0f*2.0f*3.1415f,
 };
