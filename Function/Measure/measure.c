@@ -10,6 +10,11 @@ togi_t Voltage = {
 };
 togi_t Current = {
 };
+togi_t Voltage_norm = {
+};
+togi_t Current_norm = {
+};
+
 
 static uint32_t Result_Measure[2] = {0};
 
@@ -71,10 +76,15 @@ void TOGI(void){
 	Voltage.offset += Voltage.error*SAMPLING_STEP;
 	Voltage.alfa += Voltage.omega*(Voltage.error - Voltage.beta)*SAMPLING_STEP;
 	Voltage.beta += Voltage.alfa*Voltage.omega*SAMPLING_STEP;
-	Voltage.omega += Voltage.beta*Voltage.error*(-SOGI_GAIN)*SAMPLING_STEP;
+	Voltage.omega += Voltage.beta*Voltage.error*(-TOGI_GAIN)*SAMPLING_STEP;
 	// Current PLL
 	Current.error = Current_measure - (Current.offset + Current.alfa);
 	Current.offset += Current.error*SAMPLING_STEP;
 	Current.alfa += Voltage.omega*(Current.error - Current.beta)*SAMPLING_STEP;
 	Current.beta += Current.alfa*Voltage.omega*SAMPLING_STEP;
+	//Normolizing
+	Voltage_norm.alfa = Voltage.alfa/MEASURE_VOLTAGE_GAIN;
+	Voltage_norm.beta = Voltage.beta/MEASURE_VOLTAGE_GAIN;
+	Current_norm.alfa = Current.alfa/MEASURE_CURRENT_GAIN;
+	Current_norm.beta = Current.beta/MEASURE_CURRENT_GAIN;
 }

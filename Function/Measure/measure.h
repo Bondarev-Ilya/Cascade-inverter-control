@@ -1,8 +1,10 @@
 #ifndef MEASURE_H_
 #define	MEASURE_H_
 
-#define MEASURE_GAIN 0.0054f
-#define SOGI_GAIN 100
+#define MEASURE_VOLTAGE_GAIN 0.0054f
+#define MEASURE_CURRENT_GAIN 1.0f
+
+#define TOGI_GAIN 100
 #define SAMPLING_STEP 1.0f/10000.0f
 
 #include <stm32f411xe.h>
@@ -25,5 +27,8 @@ typedef struct{
 
 extern togi_t Voltage;
 extern togi_t Current;
+
+extern togi_t Voltage_norm;
+extern togi_t Current_norm;
 
 #endif
