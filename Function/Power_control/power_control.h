@@ -3,6 +3,7 @@
 
 #include <stm32f411xe.h>
 #include "measure.h"
+#include "data_transmit.h"
 #include "math.h"
 
 void Power_Control(void);

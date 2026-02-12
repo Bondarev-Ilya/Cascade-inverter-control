@@ -14,25 +14,18 @@ float Voltage_Amp = 0.0f;
 float Voltage_Set = 0.0f;
 float P_ref = 0.0f;
 float Q_ref = 0.0f;
-float Kp = 1.0f;
+float Kp = 0.0f;
 float Ki = 0.0f;
  
 void Power_Control(void){
+	
 	Voltage_Amp = ((Voltage_norm.alfa*Voltage_norm.alfa)+(Voltage_norm.beta*Voltage_norm.beta));
 	if(Voltage_Amp < 1) Voltage_Amp = 1;
 	S = sqrt((P*P)+(Q*Q));
 	if(S < 1) S = 1;
 	Voltage_Set = (Voltage_norm.alfa*(P/S) + Voltage_norm.alfa*(Q/S));
-	Voltage_Set += Voltage.alfa;
-	if(Voltage_Set > 0.0f){
-		TIM1->CCR2 = 0;
-		TIM1->CCR1 = (uint32_t)(TIM1->ARR * Voltage_Set/240.0f);
-	}
-	else{
-		TIM1->CCR1 = 0;
-		TIM1->CCR2 = (uint32_t)(TIM1->ARR * (-1.0f*Voltage_Set/240.0f));
-	}
-	
+	Voltage_Set += Voltage_norm.alfa;
+		
 	P_loc = (Voltage_norm.alfa*Current_norm.alfa+Voltage_norm.beta*Current_norm.beta);
 	Q_loc = (Voltage_norm.beta*Current_norm.alfa-Voltage_norm.alfa*Current_norm.beta);
 	
@@ -43,4 +36,6 @@ void Power_Control(void){
 	Q_Error = Q_ref-Q_loc;
 	Q_Int += Ki*Q_Error*SAMPLING_STEP;
 	Q = Q_Int + Kp*Q_Error;
+	
+	my_fun();
 }

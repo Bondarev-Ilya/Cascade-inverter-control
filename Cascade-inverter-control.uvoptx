@@ -153,27 +153,22 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Voltage</ItemText>
+          <ItemText>angel</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Voltage_Amp</ItemText>
+          <ItemText>demon</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Voltage_Set</ItemText>
+          <ItemText>Voltage</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Current</ItemText>
-        </Ww>
-        <Ww>
-          <count>4</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Voltage_measure</ItemText>
+          <ItemText>counter,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -301,6 +296,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>.\Function\PWM\pwm.c</PathWithFileName>
       <FilenameWithoutPath>pwm.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>6</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>1</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\Function\Data_transmit\data_transmit.c</PathWithFileName>
+      <FilenameWithoutPath>data_transmit.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
