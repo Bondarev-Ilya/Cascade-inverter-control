@@ -37,5 +37,5 @@ void Power_Control(void){
 	Q_Int += Ki*Q_Error*SAMPLING_STEP;
 	Q = Q_Int + Kp*Q_Error;
 	
-	my_fun();
+	data_transmit();
 }
