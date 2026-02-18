@@ -4,6 +4,9 @@
 #define MEASURE_VOLTAGE_GAIN 0.0054f
 #define MEASURE_CURRENT_GAIN 1.0f
 
+#define SIN_FI 0.2512f
+#define COS_FI 0.9679f
+
 #define TOGI_GAIN 100
 #define SAMPLING_STEP 1.0f/10000.0f
 

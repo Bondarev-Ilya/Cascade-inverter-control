@@ -71,20 +71,24 @@ void DMA2_Stream0_IRQHandler(void){
 	GPIOC->BSRR |= GPIO_BSRR_BR14; // Stop check calculation time
 }
 void TOGI(void){
+	
 	// Voltage Pll
 	Voltage.error = Voltage_measure - (Voltage.offset + Voltage.alfa);
 	Voltage.offset += Voltage.error*SAMPLING_STEP;
 	Voltage.alfa += Voltage.omega*(Voltage.error - Voltage.beta)*SAMPLING_STEP;
 	Voltage.beta += Voltage.alfa*Voltage.omega*SAMPLING_STEP;
 	Voltage.omega += Voltage.beta*Voltage.error*(-TOGI_GAIN)*SAMPLING_STEP;
+	
 	// Current PLL
 	Current.error = Current_measure - (Current.offset + Current.alfa);
 	Current.offset += Current.error*SAMPLING_STEP;
 	Current.alfa += Voltage.omega*(Current.error - Current.beta)*SAMPLING_STEP;
 	Current.beta += Current.alfa*Voltage.omega*SAMPLING_STEP;
+	
 	//Normolizing
-	Voltage_norm.alfa = Voltage.alfa/MEASURE_VOLTAGE_GAIN;
-	Voltage_norm.beta = Voltage.beta/MEASURE_VOLTAGE_GAIN;
+	Voltage_norm.alfa = COS_FI*(Voltage.alfa/MEASURE_VOLTAGE_GAIN) - SIN_FI*(Voltage.beta/MEASURE_VOLTAGE_GAIN);
+	Voltage_norm.beta = SIN_FI*(Voltage.alfa/MEASURE_VOLTAGE_GAIN) + COS_FI*(Voltage.beta/MEASURE_VOLTAGE_GAIN);
+	
 	Current_norm.alfa = Current.alfa/MEASURE_CURRENT_GAIN;
 	Current_norm.beta = Current.beta/MEASURE_CURRENT_GAIN;
 }

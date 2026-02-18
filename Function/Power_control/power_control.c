@@ -24,6 +24,7 @@ void Power_Control(void){
 	if(S < 1) S = 1;
 	Voltage_Set = (Voltage_norm.alfa*(P/S) + Voltage_norm.alfa*(Q/S));
 	Voltage_Set += Voltage_norm.alfa;
+	
 	if(Voltage_Set > 0.0f){
 		TIM1->CCR2 = 0;
 		TIM1->CCR1 = (uint32_t)(TIM1->ARR * Voltage_Set/240.0f);
