@@ -6,5 +6,6 @@
 #include "power_control.h"
 #include "freq_up.h"
 #include "pwm.h"
+#include "data_transmit.h"
 
 #endif
