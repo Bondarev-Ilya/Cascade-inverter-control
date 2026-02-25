@@ -25,7 +25,7 @@ void Power_Control(void){
 	S = sqrt((P*P)+(Q*Q));
 	if(S < 1) S = 1;
 
-	Current_Set = (Voltage_norm.alfa*P + Voltage_norm.beta*Q)/Voltage_Amp;
+  Current_Set = (Voltage_norm.alfa*P + Voltage_norm.beta*Q)/Voltage_Amp;
 	Voltage_Set = 1.0f*Current_Set + Voltage_norm.alfa;
 		
 	if(Voltage_Set > 0.0f){
