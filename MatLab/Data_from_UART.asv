@@ -1,9 +1,0 @@
-clc, clear, close all;
-divece = serialport("COM9",9600);
-
-while(true)
-   read(divece, 13, "single");
-   if ans[1] == 10.10
-    disp(ans);
-   end
-end

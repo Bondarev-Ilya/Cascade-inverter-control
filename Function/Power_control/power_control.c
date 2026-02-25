@@ -12,6 +12,7 @@ static float Q_Int = 0.0f;
 
 float Voltage_Amp = 0.0f;
 float Voltage_Set = 0.0f;
+float Current_Set = 0.0f;
 float P_ref = 0.0f;
 float Q_ref = 0.0f;
 float Kp = 0.0f;
@@ -23,8 +24,8 @@ void Power_Control(void){
 	if(Voltage_Amp < 1) Voltage_Amp = 1;
 	S = sqrt((P*P)+(Q*Q));
 	if(S < 1) S = 1;
-	Voltage_Set = (Voltage_norm.alfa*(P/S) + Voltage_norm.alfa*(Q/S));
-	Voltage_Set += Voltage_norm.alfa;
+	Current_Set = (Voltage_norm.alfa*P + Voltage_norm.beta*Q)/Voltage_Amp;
+	Voltage_Set = 1.0f*Current_Set + Voltage_norm.alfa;
 		
 	P_loc = (Voltage_norm.alfa*Current_norm.alfa+Voltage_norm.beta*Current_norm.beta);
 	Q_loc = (Voltage_norm.beta*Current_norm.alfa-Voltage_norm.alfa*Current_norm.beta);

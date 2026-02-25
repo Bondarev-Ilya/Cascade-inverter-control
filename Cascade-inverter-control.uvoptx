@@ -153,12 +153,12 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>angel</ItemText>
+          <ItemText>angel,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>demon</ItemText>
+          <ItemText>demon,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
@@ -168,17 +168,22 @@
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>counter,0x0A</ItemText>
+          <ItemText>index_array,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>index_array,0x0A</ItemText>
+          <ItemText>Voltage_Set</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>flag_array,0x0A</ItemText>
+          <ItemText>test,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>counter,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
