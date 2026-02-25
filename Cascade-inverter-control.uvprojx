@@ -429,7 +429,7 @@
                   <MiscControls></MiscControls>
                   <Define></Define>
                   <Undefine></Undefine>
-                  <IncludePath>.\Function\Measure;.\Function\Freq_up;.\Function\Power_control;.\Function\PWM</IncludePath>
+                  <IncludePath>.\Function\Measure;.\Function\Freq_up;.\Function\Power_control;.\Function\PWM;.\Function\Data_transmit</IncludePath>
                 </VariousControls>
               </Cads>
               <Aads>
@@ -477,6 +477,11 @@
               <FileName>pwm.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Function\PWM\pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>data_transmit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Function\Data_transmit\data_transmit.c</FilePath>
             </File>
           </Files>
         </Group>
