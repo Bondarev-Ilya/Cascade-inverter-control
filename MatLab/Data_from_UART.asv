@@ -33,7 +33,7 @@ while(true)
 end
 
 function plot_data(Xdata, Ydata)
-    f1 = figure(1);
+    f1 = figure;
     plot(Xdata, Ydata, "LineWidth", 1, "Color", '#F54927');
     grid on
     title("График задаваемого напряжения")

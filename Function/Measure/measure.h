@@ -4,6 +4,7 @@
 #define MEASURE_VOLTAGE_GAIN 0.0054f
 #define MEASURE_CURRENT_GAIN 1.0f
 
+#define RC
 #define SIN_FI 0.2512f
 #define COS_FI 0.9679f
 
