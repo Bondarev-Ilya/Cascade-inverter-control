@@ -13,7 +13,7 @@ void pwm_init(void){
 	//Set TIM1 parameters 
 	RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
 	TIM1->PSC = 9;
-	TIM1->ARR = 10000; // 1 kHz
+	TIM1->ARR = 5000; // 2 kHz
 	TIM1->CCR1 = 0;
 	TIM1->CCR2 = 0;
 	TIM1->CCMR1 |= (0 << TIM_CCMR1_CC1S_Pos) | (TIM_CCMR1_PWM_MODE_1 << TIM_CCMR1_OC1M_Pos);

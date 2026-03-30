@@ -6,17 +6,18 @@
 #define TIM_CCMR1_CC1S_OUTPUT 0
 
 togi_t Voltage = {
-	.omega = 50.0f*2.0f*3.1415f,
+	.omega = FREQ,
 };
 togi_t Current = {
 };
-togi_t Voltage_norm = {
+togi_t Voltage_norm 	= {
 };
 togi_t Current_norm = {
 };
 
 
 static uint32_t Result_Measure[2] = {0};
+static float Current_filtred = 0.0f;
 
 float Voltage_measure = 0.0f;
 float Current_measure = 0.0f;
@@ -71,30 +72,30 @@ void DMA2_Stream0_IRQHandler(void){
 	GPIOC->BSRR |= GPIO_BSRR_BR14; // Stop check calculation time
 }
 void TOGI(void){
+	//Current filter
+	Current_filtred += (Current_measure - Current_filtred)*FILTER_FREQ*SAMPLING_STEP;
 	
 	// Voltage Pll
-	Voltage.error = Voltage_measure - (Voltage.offset + Voltage.alfa);
+	Voltage.error = (Voltage_measure - (Voltage.offset + Voltage.alfa));
 	Voltage.offset += Voltage.error*SAMPLING_STEP;
 	Voltage.alfa += Voltage.omega*(Voltage.error - Voltage.beta)*SAMPLING_STEP;
 	Voltage.beta += Voltage.alfa*Voltage.omega*SAMPLING_STEP;
-	Voltage.omega += Voltage.beta*Voltage.error*(-TOGI_GAIN)*SAMPLING_STEP;
+	Voltage.omega_no_sat += (Voltage.beta*Voltage.error*(-TOGI_GAIN)+Voltage.omega_dif)*SAMPLING_STEP;
+	Voltage.omega = Voltage.omega_no_sat;
+	if(Voltage.omega_no_sat >= FREQ + FREQ_SAT) Voltage.omega = FREQ + FREQ_SAT;
+	if(Voltage.omega_no_sat <= FREQ - FREQ_SAT) Voltage.omega = FREQ - FREQ_SAT;
+	Voltage.omega_dif = Voltage.omega - Voltage.omega_no_sat;	
 	
 	// Current PLL
-	Current.error = Current_measure - (Current.offset + Current.alfa);
+	Current.error = Current_filtred - (Current.offset + Current.alfa);
 	Current.offset += Current.error*SAMPLING_STEP;
 	Current.alfa += Voltage.omega*(Current.error - Current.beta)*SAMPLING_STEP;
 	Current.beta += Current.alfa*Voltage.omega*SAMPLING_STEP;
 	
-	#ifdef RC
-	//Normolizing
-	Voltage_norm.alfa = COS_FI*(Voltage.alfa/MEASURE_VOLTAGE_GAIN) - SIN_FI*(Voltage.beta/MEASURE_VOLTAGE_GAIN);
-	Voltage_norm.beta = SIN_FI*(Voltage.alfa/MEASURE_VOLTAGE_GAIN) + COS_FI*(Voltage.beta/MEASURE_VOLTAGE_GAIN);
-	Current_norm.alfa = Current.alfa/MEASURE_CURRENT_GAIN;
-	Current_norm.beta = Current.beta/MEASURE_CURRENT_GAIN;
-	#else
-	Voltage_norm.alfa = Voltage.alfa/MEASURE_VOLTAGE_GAIN;
-	Voltage_norm.beta = Voltage.beta/MEASURE_VOLTAGE_GAIN;
-	Current_norm.alfa = Current.alfa/MEASURE_CURRENT_GAIN;
-	Current_norm.beta = Current.beta/MEASURE_CURRENT_GAIN;
-	#endif
+	Voltage_norm.alfa = SECONDARY_WINDING_COEFFICIENT*Voltage.alfa/MEASURE_VOLTAGE_GAIN;
+	Voltage_norm.beta = SECONDARY_WINDING_COEFFICIENT*Voltage.beta/MEASURE_VOLTAGE_GAIN;
+	Current_norm.alfa = COS_FI*(Current.alfa/MEASURE_CURRENT_GAIN)-SIN_FI*(Current.beta/MEASURE_CURRENT_GAIN);
+	Current_norm.beta = SIN_FI*(Current.alfa/MEASURE_CURRENT_GAIN)+COS_FI*(Current.beta/MEASURE_CURRENT_GAIN);
+	Current_norm.alfa = Current_norm.alfa*AMP_GAIN;
+	Current_norm.beta = Current_norm.beta*AMP_GAIN;
 }

@@ -1,7 +1,7 @@
 #include "power_control.h"
 
-static float P_loc = 0.0f;
-static float Q_loc = 0.0f;
+float P_loc = 0.0f;
+float Q_loc = 0.0f;
 static float P = 0.0f;
 static float Q = 0.0f;
 static float S = 0.0f;
@@ -13,10 +13,10 @@ static float Q_Int = 0.0f;
 float Voltage_Amp = 0.0f;
 float Voltage_Set = 0.0f;
 float Current_Set = 0.0f;
-float P_ref = 0.0f;
+float P_ref = 0.5f;
 float Q_ref = 0.0f;
-float Kp = 0.0f;
-float Ki = 0.0f;
+float Kp = 1.0f;
+float Ki = 0.5f;
  
 void Power_Control(void){
 	
@@ -24,17 +24,17 @@ void Power_Control(void){
 	if(Voltage_Amp < 1) Voltage_Amp = 1;
 	S = sqrt((P*P)+(Q*Q));
 	if(S < 1) S = 1;
-
+	
   Current_Set = (Voltage_norm.alfa*P + Voltage_norm.beta*Q)/Voltage_Amp;
 	Voltage_Set = 1.0f*Current_Set + Voltage_norm.alfa;
 		
 	if(Voltage_Set > 0.0f){
 		TIM1->CCR2 = 0;
-		TIM1->CCR1 = (uint32_t)(TIM1->ARR * Voltage_Set/240.0f);
+		TIM1->CCR1 = (uint32_t)(TIM1->ARR * Voltage_Set/SECONDARY_WINDING);
 	}
 	else{
 		TIM1->CCR1 = 0;
-		TIM1->CCR2 = (uint32_t)(TIM1->ARR * (-1.0f*Voltage_Set/240.0f));
+		TIM1->CCR2 = (uint32_t)(TIM1->ARR * (-1.0f*Voltage_Set/SECONDARY_WINDING));
 	}
 	
 	P_loc = (Voltage_norm.alfa*Current_norm.alfa+Voltage_norm.beta*Current_norm.beta);

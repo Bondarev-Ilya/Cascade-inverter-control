@@ -91,7 +91,9 @@ void search_points(void){
 
 void put_on_array(uint8_t* tmp_arr){
 	uint32_t tmp;
-	tmp = *(uint32_t*)&Voltage_Set;
+	tmp = *(uint32_t*)&Current_norm.alfa;
+	//tmp = *(uint32_t*)&Voltage_Set;
+	//tmp = *(uint32_t*)&P_loc;
 	for(uint8_t i = 0; i<4; i++){
 		uint8_t val;
 		val = (tmp & (0xFF<<(8*i)))>>(8*i);

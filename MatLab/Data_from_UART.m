@@ -1,6 +1,6 @@
 clc, clear, close all;
 clear divece
-device = serialport("COM9",115200);
+device = serialport("COM13",115200);
 
 flag = 0;
 
@@ -12,6 +12,7 @@ solve = end_time/(point-1);
 time = 0:solve:end_time;
 
 while(true)
+    clc;
     while(flag == 0)
         one_bytes = uint8(read(device, 1, "uint8"));
         %disp(one_bytes)
@@ -25,6 +26,7 @@ while(true)
     if(meta_verification(message) == 1)
         data = uint8(message(4:end-1));
         data_float = typecast(data, "single");
+        disp("data read");
         plot_data(time, data_float);
     else
         flag = 0;
@@ -38,8 +40,10 @@ function plot_data(Xdata, Ydata)
     grid on
     title("График задаваемого напряжения")
     xlabel("Время, с")
-    ylabel("Напряжение, В")
-    ylim([-260 260]);
+    ylabel("Ток, А")
+    ylim([-0.1 0.1]);%Current
+    %ylim([-0.7 0.7]);%Power
+    %ylim([9 15]);%Voltage
 end
 
 function status = meta_verification(message_checking)

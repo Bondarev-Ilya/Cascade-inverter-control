@@ -5,7 +5,6 @@
 #include "measure.h"
 #include "power_control.h"
 
-
 #define NUMBER_OF_MEASUREMENTS 400 // 200 point (50Hz/10kHz) !32bit!
 #define NUMBER_OF_POINTS 50
 
@@ -29,5 +28,7 @@ void dma_road_select(void);
 
 extern uint8_t angel[LENGTH_ARR];
 extern uint8_t demon[LENGTH_ARR];
+
+extern float P_loc;
 
 #endif
